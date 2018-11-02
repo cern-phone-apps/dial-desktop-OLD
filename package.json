@@ -1,0 +1,33 @@
+{
+  "name": "dial-desktop",
+  "productName": "CERN Phone",
+  "description": "Phone desktop version",
+  "author": "CERN <rene.fernandez@cern.ch>",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/cern-dialtone"
+  },
+  "homepage": "https://github.com/cern-dialtone",
+  "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder -mwl",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.9"
+  },
+  "devDependencies": {
+    "electron": "3.0.7",
+    "electron-builder": "^20.29.0",
+    "electron-webpack": "^2.3.1",
+    "webpack": "^4.23.1"
+  },
+  "resolutions": {
+    "upath": "^1.0.5"
+  }
+}
