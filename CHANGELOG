@@ -1,0 +1,16 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+This project adheres to [Dial Desktop](https://github.com/cern-dialtone/dial-desktop).
+
+## [unreleased]
+### Added
+- XXX
+### Fixed
+- XXX
+### Improved
+- XXX
+
+## w0.1.5 - 2019-02-20
+### Added
+- Support for dotenv
+- Blue icon

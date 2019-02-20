@@ -3,7 +3,7 @@
   "productName": "CERN Phone",
   "description": "Phone desktop version",
   "author": "CERN <rene.fernandez@cern.ch>",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "repository": {
     "type": "https",
