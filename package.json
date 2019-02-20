@@ -3,7 +3,7 @@
   "productName": "CERN Phone",
   "description": "Phone desktop version",
   "author": "CERN <rene.fernandez@cern.ch>",
-  "version": "0.0.0",
+  "version": "0.1.4",
   "license": "MIT",
   "repository": {
     "type": "https",
@@ -19,6 +19,7 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "dotenv": "^6.2.0",
     "source-map-support": "^0.5.9"
   },
   "devDependencies": {

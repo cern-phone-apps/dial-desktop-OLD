@@ -47,7 +47,9 @@ yarn dist:dir
 
 ## Build on Mac and Windows
 
-
+```bash
+yarn disk
+```
 
 ## Build on Linux
 
