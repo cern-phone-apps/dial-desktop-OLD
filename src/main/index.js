@@ -1,28 +1,28 @@
-'use strict'
+"use strict";
 
-require('dotenv').config();
+import { app, BrowserWindow } from "electron";
+import * as path from "path";
+import { Configuration } from "./config";
+import { format as formatUrl } from "url";
 
-import { app, BrowserWindow, Tray, Menu } from 'electron'
-import * as path from 'path'
-import { format as formatUrl } from 'url'
-
-const isDevelopment = process.env.NODE_ENV !== 'production'
+const isDevelopment = process.env.NODE_ENV !== "production";
 const assetsDir = path.resolve(app.getAppPath(), "build");
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
-let mainWindow
+let mainWindow;
 let isQuiting;
 let tray;
 
 function createMainWindow() {
   let windowOptions = {
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: false
     },
     width: 1024,
     height: 600,
-    title: 'CERN Phone'};
+    title: "CERN Phone"
+  };
 
-  process.stdout.write(assetsDir)
+  process.stdout.write(assetsDir);
   // tray = new Tray('build/icon.png');
   //
   // tray.setContextMenu(Menu.buildFromTemplate([
@@ -39,10 +39,10 @@ function createMainWindow() {
   //   }
   // ]));
 
-  const window = new BrowserWindow(windowOptions)
+  const window = new BrowserWindow(windowOptions);
 
   if (isDevelopment) {
-    window.webContents.openDevTools()
+    window.webContents.openDevTools();
   }
 
   // mainWindow = new BrowserWindow(windowOptions)
@@ -53,8 +53,13 @@ function createMainWindow() {
   //     protocol: 'file:',
   //     slashes: true
   // }))
-  process.stdout.write('your output to command prompt console or node js ')
-  window.loadURL(process.env.WEBAPP_URL);
+
+  window.webContents.session.clearCache(function() {
+    process.stdout.write("Cache cleared");
+  });
+
+  process.stdout.write("your output to command prompt console or node js ");
+  window.loadURL(Configuration.WEBAPP_URL);
 
   // if (isDevelopment) {
   //   window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
@@ -67,9 +72,9 @@ function createMainWindow() {
   //   }))
   // }
 
-  window.on('closed', () => {
-    mainWindow = null
-  })
+  window.on("closed", () => {
+    mainWindow = null;
+  });
 
   // window.on('minimize',function(event){
   //   event.preventDefault();
@@ -91,48 +96,55 @@ function createMainWindow() {
   //   window.hide();
   // });
 
-  window.webContents.on('devtools-opened', () => {
-    window.focus()
+  window.webContents.on("devtools-opened", () => {
+    window.focus();
     setImmediate(() => {
-      window.focus()
-    })
-  })
+      window.focus();
+    });
+  });
 
-  return window
+  return window;
 }
 
 // quit application when all windows are closed
-app.on('window-all-closed', () => {
+app.on("window-all-closed", () => {
   // on macOS it is common for applications to stay open until the user explicitly quits
-  if (process.platform !== 'darwin') {
-    app.quit()
+  if (process.platform !== "darwin") {
+    app.quit();
   }
-})
+});
 
-app.on('activate', () => {
+app.on("activate", () => {
   // on macOS it is common to re-create a window even after all windows have been closed
   if (mainWindow === null) {
-    mainWindow = createMainWindow()
+    mainWindow = createMainWindow();
   }
-})
+});
 
 // create main BrowserWindow when electron is ready
-app.on('ready', () => {
-  mainWindow = createMainWindow()
-})
+app.on("ready", () => {
+  mainWindow = createMainWindow();
+});
 
-app.on('certificate-error', function (event, webContents, url, error, certificate, callback) {
-  process.stdout.write(url)
+app.on("certificate-error", function(
+  event,
+  webContents,
+  url,
+  error,
+  certificate,
+  callback
+) {
+  process.stdout.write(url);
   // if (url === 'https://imac02.cern.ch:3000/' || url === 'https://imac02.cern.ch:8080/') {
-  process.stdout.write('Preventing certificate error')
+  process.stdout.write("Preventing certificate error");
   event.preventDefault();
-  callback(true)
+  callback(true);
   // } else {
   //     process.stdout.write('Not allowing certificate error')
   //     callback(false)
   // }
 });
 
-app.on('before-quit', function () {
+app.on("before-quit", function() {
   isQuiting = true;
 });

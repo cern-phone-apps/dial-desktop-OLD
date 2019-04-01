@@ -19,13 +19,14 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
-    "dotenv": "^6.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "source-map-support": "^0.5.9"
   },
   "devDependencies": {
     "electron": "3.0.7",
     "electron-builder": "^20.29.0",
     "electron-webpack": "^2.3.1",
+    "prettier": "^1.16.4",
     "webpack": "^4.23.1"
   },
   "resolutions": {
